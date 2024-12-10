@@ -1,6 +1,6 @@
 <?php
 //require_once "usuarios.php";
-require_once "seguridad.php";
+require_once "./controladores/seguridad.php";
 $seguridad = new Seguridad();
 
     if(!file_exists('config.php')){
