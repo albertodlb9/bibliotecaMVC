@@ -1,5 +1,5 @@
 <?php
-require_once "usuarios.php";
+//require_once "usuarios.php";
 require_once "seguridad.php";
 $seguridad = new Seguridad();
 
@@ -9,7 +9,7 @@ $seguridad = new Seguridad();
     if(isset($_POST['enviar'])){
         require_once 'usuarios.php';
         require_once 'conexion.php';
-        $usuario = new usuario(conexion::getConn());
+        //$usuario = new usuario(conexion::getConn());
         $user = $_POST['usuario'];
         $password = $_POST['password'];
         $login = $usuario->login($user, $password);
