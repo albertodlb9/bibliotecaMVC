@@ -1,5 +1,7 @@
 <?php
+require_once 'controladores/db.php';
     class Model{
+        
         protected $table;
         protected $db;
 
