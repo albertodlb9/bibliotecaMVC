@@ -1,9 +1,9 @@
 <?php
     class View{
-        public static function show($viewName, $data = null){
-            include ("header.php");
-            include("$viewName.php?datos=$data");
-            include ("footer.php");
+        public static function show($viewName){
+            include ("vistas/header.php");
+            include("$viewName.php");
+            include ("vistas/footer.php");
         }
     }
 ?>

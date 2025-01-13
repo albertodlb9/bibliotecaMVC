@@ -18,8 +18,10 @@ require_once 'controladores/db.php';
         }
 
         public function get($id){
-            $record = $this->db->consultaSelect("SELECT * FROM $this->table WHERE id = $id");
-            return $record;
+            $stmt = $this->db->consultaSelect("SELECT * FROM $this->table WHERE id = ?");
+            $stmt->bind_param("s", $id); // "s" indica que $user es una cadena
+            $stmt->execute();
+            return $stmt->fetch();
         }
 
         public function delete($id){

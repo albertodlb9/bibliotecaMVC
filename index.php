@@ -1,4 +1,5 @@
 <?php
+require_once 'controladores/homeController.php';
 require_once 'controladores/usuarioController.php';
 
 if(!file_exists('config.php')){
@@ -12,10 +13,17 @@ if (!isset($_REQUEST['action'])) {
   }
 
   if (!isset($_REQUEST['controller'])) {
-    $controllerClassName = "Controller";
+    $controllerClassName = "homeController";
   } else {
     $controllerClassName = $_REQUEST['controller'];
   }
   $controller = new $controllerClassName();
-  $controller->$action();
+
+  if (!isset($_REQUEST['data'])) {
+    $data = null;
+  } else {
+    $data = $_REQUEST['data'];
+  }
+  
+  $controller->$action($data);
 ?>
