@@ -1,6 +1,8 @@
 <?php
 require_once 'controladores/homeController.php';
 require_once 'controladores/usuarioController.php';
+require_once 'controladores/libroController.php';
+require_once 'controladores/autorController.php';
 
 if(!file_exists('config.php')){
     header('Location: install.php');

@@ -1,61 +1,35 @@
 <?php
 require_once 'controladores/db.php';
-    class Model{
-        
-        protected $table;
-        protected $db;
+class Model {
+    protected $table;
+    protected $db;
 
-        public function __construct($table){
-            $this->db = new Db();
-            $this->$table = $table;
-            $this->db->crearConexion();
-        }
-
-        public function getAll(){
-            $lista = $this->db->consultaSelect("SELECT * FROM $this->table");
-            $this->db->cerrarConexion();
-            return $lista;
-        }
-
-        public function get($id){
-            $stmt = $this->db->consultaSelect("SELECT * FROM $this->table WHERE id = ?");
-            $stmt->bind_param("s", $id); // "s" indica que $user es una cadena
-            $stmt->execute();
-            return $stmt->fetch();
-        }
-
-        public function delete($id){
-            $borrar = $this->db->manipulacionDatos("DELETE FROM $this->table WHERE id = $id");
-            return $borrar;
-        }
-
-        public function insert(...$values){
-            $sql = "INSERT INTO $this->table VALUES(";
-            $maximo = count($values);
-            $contador = 1;
-            foreach($values as $value){
-                if($contador == $maximo){
-                    $sql .= "'$value');";
-                }else{
-                    $sql .= "'$value', ";
-                }
-                $contador++;
-            }
-            $insertar = $this->db->manipulacionDatos($sql);
-        }
-        public function update($id, ...$values){
-            $sql = "UPDATE $this->table SET ";
-            $maximo = count($values);
-            $contador = 1;
-            foreach($values as $value){
-                if($contador == $maximo){
-                    $sql .= "$value WHERE id = $id;";
-                }else{
-                    $sql .= "$value, ";
-                }
-                $contador++;
-            }
-            
-        }
+    public function __construct($table){
+        $this->db = new Db();
+        $this->table = $table; // Corregido
+        $this->db->crearConexion();
     }
+
+    public function getAll(){
+        $sql = "SELECT * FROM $this->table";
+        return $this->db->consultaSelect($sql);
+    }
+
+    public function get($id){
+        $sql = "SELECT * FROM $this->table WHERE  login = ?";
+        $stmt = $this->db->db->prepare($sql);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    public function delete($id){
+        $sql = "DELETE FROM $this->table WHERE login = ?";
+        $stmt = $this->db->db->prepare($sql);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        return $stmt->affected_rows;
+    } 
+}
 ?>

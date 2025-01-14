@@ -9,12 +9,12 @@
                 if($datos){
                     if(password_verify($password.$datos['salt'], $datos['password'])){
                         session_start();
-                        $_SESSION['usuario'] = $datos['usuario'];
+                        $_SESSION['login'] = $datos['login'];
                         $_SESSION['rol'] = $datos['rol'];
                         $_SESSION['nombre'] = $datos['nombre'];
                         $_SESSION['apellidos'] = $datos['apellidos'];
                         $_SESSION["ip"] = $_SERVER['REMOTE_ADDR'];
-                        header('Location: index.php');
+                        header('Location: index.php?action=logeado');
                     }else{
                         header('Location: index.php?err=Usuario o contraseña incorrectos');
                     }
@@ -24,6 +24,11 @@
             }
             require_once 'vistas/View.php';   
             View::show("showIndex"); 
+        }
+
+        public function logeado(){
+            require_once 'vistas/View.php';   
+            View::show("logeado");
         }
     }
 ?>
