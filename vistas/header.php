@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Biblioteca</title>
+    <link rel="shortcut icon" href="imagenes/icons8-libro-16.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
