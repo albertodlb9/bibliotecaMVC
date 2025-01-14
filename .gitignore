@@ -1,3 +1,5 @@
 config.php
 /imagenes/*
 !/imagenes/
+!/imagenes/.gitkeep
+!/imagenes/icons8-libro-16.png
