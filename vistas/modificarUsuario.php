@@ -7,12 +7,15 @@
             if(!$_SESSION['rol'] == 'administrador'){
                 header('Location: index.php');
             }
+            $rol = $data['rol'];
+            $nombre = $data['nombre'];
+            $apellidos = $data['apellidos'];
+            $login = $data['login'];
+
             ?>
 
         <form action="" method="post" enctype="multipart/form-data">
-            <label for="avatar">Avatar:</label>
-            <input type="file" name="avatar" id="">
-            <br>
+        
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" id="nombre" value="<?php echo $nombre; ?>" required>
             <br>

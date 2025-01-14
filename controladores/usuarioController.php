@@ -97,29 +97,12 @@
                 }else{
                     $contraseña = $password;     
                 }
-                if(isset($_FILES["avatar"] ) && $_FILES["avatar"]["error"] == UPLOAD_ERR_OK){    
-                    $ruta = $_FILES["avatar"]["tmp_name"];
-                    $tipo = $_FILES["avatar"]["type"];
-                    $tam = $_FILES["avatar"]["size"];
-                    $destino = "imagenes/".$nuevoLogin;
-                    if(move_uploaded_file($ruta, $destino) && $tam < 1000000){
-                        $avatar = $destino;
-                        $usuario = new Usuario();
-                        $usuario->update($nombre, $apellidos, $login, $nuevoLogin, $contraseña,$avatar, $rol);
-                        header('Location: index.php?controller=usuarioController&action=listadoUsuarios&msg=Usuario modificado correctamente');
-                    }else{
-                        header('Location: index.php?controller=usuarioController&action=modificarUsuario&data='.$login.'&err=Error al subir el archivo');
-                    }
-                }else{
-                    $avatar = "imagenes/".$nuevoLogin;
-                    $usuario = new Usuario();
-                    rename("imagenes/".$login, $avatar);
-                    $usuario->update($nombre, $apellidos, $login, $nuevoLogin, $contraseña ,$avatar, $rol);
-                    header('Location: index.php?controller=usuarioController&action=listadoUsuarios&msg=Usuario modificado correctamente');
-                }
-            
+                $usuario = new Usuario();
+                $usuario->update($login, $nombre, $apellidos, $nuevoLogin, $contraseña, $salt, $rol);
+                header('Location: index.php?controller=usuarioController&action=listadoUsuarios&msg=Usuario modificado correctamente'); 
+            }
             View::show("modificarUsuario", $datos);
         }
-    }
 }
+
 ?>

@@ -1,3 +1,11 @@
+<?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(!$_SESSION['rol'] == 'bibliotecario'){
+        header('Location: index.php');
+    }
+?>
 <h1>Insertar autor</h1>
     <form action="index.php?controller=autorController&action=insertarAutor" method="post">
         <label for="nombre">Nombre</label>
